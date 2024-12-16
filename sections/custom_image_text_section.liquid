@@ -1,0 +1,54 @@
+<!-- sections/custom_image_text_section.liquid -->
+<div class="container">
+  <div class="row">
+    {% assign blocks = section.blocks | json_parse %}
+    {% for block in blocks %}
+      <div class="col-md-3">
+        <img src="{{ block.image | img_url: 'medium' }}" alt="{{ block.alt_text | default: 'Image' }}">
+        <p>{{ block.text }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Image Text Section",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Section Title",
+      "id": "section_title",
+      "default": "Custom Image Text Section"
+    },
+    {
+      "type": "text",
+      "label": "Subtitle",
+      "id": "subtitle",
+      "default": "Add your blocks below:"
+    },
+    {
+      "type": "text",
+      "label": "Block Image",
+      "id": "image"
+    },
+    {
+      "type": "text",
+      "label": "Alt Text",
+      "id": "alt_text",
+      "default": "Image"
+    },
+    {
+      "type": "text",
+      "label": "Text",
+      "id": "text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Image Text Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

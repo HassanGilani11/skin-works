@@ -1,0 +1,156 @@
+{% if section.settings.show_brands_slider %}
+<div class="brands-slider {% if section.settings.slideshow_width == 'contained' %}container{% endif %}">
+  <div id="slick-{{ section.id }}" class="slickslider brands-responsive">
+    {% for block in section.blocks %}
+    <div class="brand-slide">
+      {% if block.settings.brand_link %}
+      <a href="{{ block.settings.brand_link }}">
+      {% endif %}
+      <img src="{{ block.settings.slideshow_image | img_url: '133x' }}" alt="{{ block.settings.slideshow_image.alt }}">
+      {% if block.settings.brand_link %}
+      </a>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+
+
+{% schema %}
+ {
+    "name": "Brands Slider",
+    "max_blocks": 20,
+    "settings": [
+      {
+        "type": "select",
+        "id": "slideshow_width",
+        "label": "Layout",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full-width"
+          },
+          {
+            "value": "contained",
+            "label": "Contained"
+          }
+        ],
+        "default": "full"
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_brands_slider",
+        "label": "Enable brands slider",
+		"default": true
+      },
+
+      {
+        "type": "header",
+        "content": "Info"
+      },
+      {
+        "type": "paragraph",
+        "content": "You may upload up to 25 brands"
+      },
+	  {
+        "type": "paragraph",
+        "content": "Please try to use the same pixel size for all images - I've suggested 133px by 73px but you can use whatever other size you want"
+      }
+
+	],
+     "blocks" : [
+      {
+        "type": "brand",
+        "name": "Brand",
+        "settings": [
+      {
+        "type": "header",
+        "content": "Brand"
+      },
+      {
+        "type": "image_picker",
+        "id": "slideshow_image",
+        "label": "Image",
+		"info": "133 x 73px png recommended"
+      },
+      {
+        "type": "url",
+        "id": "brand_link",
+        "label": "Link URL"
+      }
+	  ]
+ 	 }
+	],
+  "presets": [{
+    "name": "Brand Slideshow",
+    "category": "Image",
+    "settings": {
+    },
+    "blocks": [
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      }
+    ]
+  }]
+ }
+{% endschema %}
+
+
+
+{% javascript %}
+// Initialize Slick slider
+$(document).ready(function(){
+  $('.brands-responsive').slick({
+    dots: false,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 6,
+    slidesToScroll: 4,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true
+        }
+      },
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+});
+{% endjavascript %}
+
+{% stylesheet %}
+/* Optional: Add custom styles for your slider */
+.slick-slide img {
+  display: block;
+  text-align: center;
+  margin: auto;
+}
+{% endstylesheet %}

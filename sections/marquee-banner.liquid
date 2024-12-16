@@ -1,0 +1,128 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<style>
+  @media only screen and (max-width: 600px) {
+    #gallery img {
+      margin: unset !important;
+    }   
+  }
+#gallery button{
+display:none !important;
+}
+  #gallery img {
+    width: 175px !important;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+  div#gallery {
+margin: 0 auto;
+}
+ .slick-track {
+    gap: 50px;
+    display: flex;
+    align-content: flex-end;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+ 
+</style>
+
+<div id="gallery">
+  <img src="{{ section.settings.img1|img_url:'master' }}">
+  <img src="{{ section.settings.img2|img_url:'master' }}">
+  <img src="{{ section.settings.img3|img_url:'master' }}">
+ <img src="{{ section.settings.img4|img_url:'master' }}">
+ <img src="{{ section.settings.img5|img_url:'master' }}">
+</div>
+
+
+
+
+{% schema %}
+  {
+    "name": "Marquee Banner",
+    "settings": [
+{
+"type":"image_picker",
+"id":"img1",
+"label":"image 1"
+
+},
+{
+"type":"image_picker",
+"id":"img2",
+"label":"image 2"
+
+},
+{
+"type":"image_picker",
+"id":"img3",
+"label":"image 3"
+
+},
+{
+"type":"image_picker",
+"id":"img4",
+"label":"image 4"
+
+},
+{
+"type":"image_picker",
+"id":"img5",
+"label":"image 5"
+
+}
+],
+"presets":[
+{
+"name":"marquee Banner"
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+#gallery {
+    margin: 1rem;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+ #gallery img{
+    margin: .2rem;
+  }
+
+
+
+
+
+{% endstylesheet %}
+
+
+
+<script>
+
+$('#gallery').slick({
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 0,
+  speed: 8000,
+  pauseOnHover: false,
+  cssEase: 'linear',
+   responsive: [
+     
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+});
+</script>
